@@ -13,10 +13,10 @@
     <script>window.jQuery || document.write('<script src="../../assets/js/vendor/jquery.min.js"><\/script>')</script>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
-    <script src="Video.js"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 <script defer src="https://use.fontawesome.com/releases/v5.0.10/js/all.js" integrity="sha384-slN8GvtUJGnv6ca26v8EzVaR9DC58QEwsIk9q1QXdCU8Yu8ck/tL/5szYlBbqmS+" crossorigin="anonymous"></script>
     <link href="Video.css" rel="stylesheet">
+    
 
   </head>
 
@@ -77,7 +77,10 @@
             </div>
            </nav>
            <div class="container">
-                <div class="col-sm-8">
+              <div class="col-sm-12" id = "video_title_top">
+                  <!-- <h1 class="video-title">《尖叫旅社3：怪獸假期》2018 電影預告 (HOTEL TRANSYLVANIA 3 Trailer 2 (2018))</h1> -->
+                </div>
+                <div class="col-sm-7">
                    <div class="thumbnail" >
                        <div class="video-container">
                          <div id="player">
@@ -86,9 +89,9 @@
                        </div>
                        <div id="caption_block">
                             <div id="caption-lang">
-                              <div class="en lang">
-                                <span captions_detail_id="27751919"><span>No</span>, <span>no</span>, I <span>want</span> <span>to</span> <span>meet</span> <span>someone</span>.</span></div><div class="zh-Hant lang">
-                                <span captions_detail_id="27751967">不是啦，我是說我想和女生「見面聊天」</span>
+                              <div class="en lang" id = "under_subtitle" >
+                                <!-- <span captions_detail_id="27751919"><span>No</span>, <span>no</span>, I <span>want</span> <span>to</span> <span>meet</span> <span>someone</span>.</span></div><div class="zh-Hant lang">
+                                <span captions_detail_id="27751967">不是啦，我是說我想和女生「見面聊天」</span> -->
                               </div>
                             </div>
                        </div>
@@ -97,25 +100,20 @@
                 <div class="col-sm-4">
                     <div class="thumbnail" id="sub" >
                      <nav class="sub">
-                         <ul>
-                             <li><i class="far fa-play-circle"></i>Link 1</li>
-                             <li><i class="far fa-play-circle"></i>Link 1</li>
-                             <li><i class="far fa-play-circle"></i>Link 1</li>
-                             <li><i class="far fa-play-circle"></i>Link 1</li>
-                             <li><i class="far fa-play-circle"></i>Link 1</li>
-                             <li><i class="far fa-play-circle"></i>Link 1</li>
-                             <li><i class="far fa-play-circle"></i>Link 1</li>
-                             <li><i class="far fa-play-circle"></i>Link 1</li>
-                             <li><i class="far fa-play-circle"></i>Link 1</li>
-                             <li><i class="far fa-play-circle"></i>Link 1</li>
+                         <ul id = "subtitle">
+                            
                          </ul>
                      </nav>
                   </div>
                 </div>
-              <div class="col-sm-12" id = "video_title">
+              <div class="col-sm-12" id = "video_title_bot">
                 <!-- <h1 class="video-title">《尖叫旅社3：怪獸假期》2018 電影預告 (HOTEL TRANSYLVANIA 3 Trailer 2 (2018))</h1> -->
               </div>
            </div>
       </div>
+
+      
   </body>
+  <script src="data.js"></script>
+  <script src="Video.js"></script>
 </html>
