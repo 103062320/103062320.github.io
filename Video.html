@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+    <title>Starter Template for Bootstrap</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+    <script>window.jQuery || document.write('<script src="../../assets/js/vendor/jquery.min.js"><\/script>')</script>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <script src="Video.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+<script defer src="https://use.fontawesome.com/releases/v5.0.10/js/all.js" integrity="sha384-slN8GvtUJGnv6ca26v8EzVaR9DC58QEwsIk9q1QXdCU8Yu8ck/tL/5szYlBbqmS+" crossorigin="anonymous"></script>
+    <link href="Video.css" rel="stylesheet">
+
+  </head>
+
+  <body>
+  <div id="container">
+           <nav class="navbar navbar-inverse navbar-fixed-top">
+             <div class="container">
+              <div class="navbar-header">
+                <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+                  <span class="sr-only">Toggle navigation</span>
+                  <span class="icon-bar"></span>
+                  <span class="icon-bar"></span>
+                  <span class="icon-bar"></span>
+                </button>
+                <a class="navbar-brand" href="#">VoiceTube</a>
+              </div>
+              <div id="navbar" class="collapse navbar-collapse">
+                <ul class="nav navbar-nav">
+                  <!-- <li class="active"><a href="#">Channels</a></li> -->
+                  <li class="dropdown">
+                      <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Channels <span class="caret"></span></a>
+                      <ul class="dropdown-menu">
+                        <li><a href="#">Action</a></li>
+                        <li><a href="#">Another action</a></li>
+                        <li><a href="#">Something else here</a></li>
+                        <li role="separator" class="divider"></li>
+                        <li class="dropdown-header">Nav header</li>
+                        <li><a href="#">Separated link</a></li>
+                        <li><a href="#">One more separated link</a></li>
+                      </ul>
+                    </li>
+                    <li class="dropdown">
+                      <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Levels <span class="caret"></span></a>
+                      <ul class="dropdown-menu">
+                        <li><a href="#">Action</a></li>
+                        <li><a href="#">Another action</a></li>
+                        <li><a href="#">Something else here</a></li>
+                        <li role="separator" class="divider"></li>
+                        <li class="dropdown-header">Nav header</li>
+                        <li><a href="#">Separated link</a></li>
+                        <li><a href="#">One more separated link</a></li>
+                      </ul>
+                    </li>
+                  <li class="dropdown">
+                      <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Listening & Speaking <span class="caret"></span></a>
+                      <ul class="dropdown-menu">
+                        <li><a href="#">Action</a></li>
+                        <li><a href="#">Another action</a></li>
+                        <li><a href="#">Something else here</a></li>
+                        <li role="separator" class="divider"></li>
+                        <li class="dropdown-header">Nav header</li>
+                        <li><a href="#">Separated link</a></li>
+                        <li><a href="#">One more separated link</a></li>
+                      </ul>
+                    </li>
+                </ul>
+              </div><!--/.nav-collapse -->
+            </div>
+           </nav>
+           <div class="container">
+                <div class="col-sm-8">
+                   <div class="thumbnail" >
+                       <div class="video-container">
+                         <div id="player">
+                         </div>
+                                <!-- <iframe width="560" height="315" src="https://www.youtube.com/embed/paREY4LLwEY" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe> -->
+                       </div>
+                       <div id="caption_block">
+                            <div id="caption-lang">
+                              <div class="en lang">
+                                <span captions_detail_id="27751919"><span>No</span>, <span>no</span>, I <span>want</span> <span>to</span> <span>meet</span> <span>someone</span>.</span></div><div class="zh-Hant lang">
+                                <span captions_detail_id="27751967">不是啦，我是說我想和女生「見面聊天」</span>
+                              </div>
+                            </div>
+                       </div>
+                  </div>
+                </div>
+                <div class="col-sm-4">
+                    <div class="thumbnail" id="sub" >
+                     <nav class="sub">
+                         <ul>
+                             <li><i class="far fa-play-circle"></i>Link 1</li>
+                             <li><i class="far fa-play-circle"></i>Link 1</li>
+                             <li><i class="far fa-play-circle"></i>Link 1</li>
+                             <li><i class="far fa-play-circle"></i>Link 1</li>
+                             <li><i class="far fa-play-circle"></i>Link 1</li>
+                             <li><i class="far fa-play-circle"></i>Link 1</li>
+                             <li><i class="far fa-play-circle"></i>Link 1</li>
+                             <li><i class="far fa-play-circle"></i>Link 1</li>
+                             <li><i class="far fa-play-circle"></i>Link 1</li>
+                             <li><i class="far fa-play-circle"></i>Link 1</li>
+                         </ul>
+                     </nav>
+                  </div>
+                </div>
+              <div class="col-sm-12" id = "video_title">
+                <!-- <h1 class="video-title">《尖叫旅社3：怪獸假期》2018 電影預告 (HOTEL TRANSYLVANIA 3 Trailer 2 (2018))</h1> -->
+              </div>
+           </div>
+      </div>
+  </body>
+</html>
