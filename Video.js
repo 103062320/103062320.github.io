@@ -3,8 +3,7 @@
 var url = location.href;
 var ary1;
 //再來用去尋找網址列中是否有資料傳遞(QueryString)
-if(url.indexOf('?')!=-1)
-{
+if(url.indexOf('?')!=-1){
      ary1 = url.split('?');
      console.log(ary1[1]);
 }
@@ -24,11 +23,8 @@ $.ajax({
     console.log(data);
     var video = $("#video_title_top").append('<h1 id = "title">'+data.items[0].snippet.title+'</h1>');
     var video1 = $("#video_title_bot").append('<h1 id = "title">'+data.items[0].snippet.title+'</h1>');
-
-
   }
 });
-
 
 
 
@@ -38,18 +34,29 @@ obj = JSON.parse(text);
 
 var count = Object.keys(obj.lyrics).length;
 
-var s = ""
-
-for(var i = 0; i < count; i++)
-{
-  var small_sub =  obj.lyrics[i].l + '</br>';
-  var subtitle = $("#subtitle").append('<li><i class="far fa-play-circle" onclick="playAt('+obj.lyrics[i].t+','+obj.lyrics[i].d+')"></i> '+small_sub+'</li>'); 
-	s += '[Start Time] ' + obj.lyrics[i].t + ' [Duration] ' + obj.lyrics[i].d + ' [Lyrics] ' + obj.lyrics[i].l + '</br>';
+for(var i = 0; i < count; i++){
+  var small_sub =  obj.lyrics[i].l;
+  //console.log(small_sub);
+  var subtitle = $("#subtitle").append('<li class = "arc'+ i +'" ><i class="far fa-play-circle" onclick="playAt('+obj.lyrics[i].t+','+obj.lyrics[i].d+')"></i> '+small_sub+'</li>'); 
 }
 
-
-
-
+// var ssss = '';
+// for (var i = 0; i <10;i++){
+//   console.log($('ul.arcchang li.arc'+i).position());
+// }
+// console.log('===============================');
+// s = $('ul.arcchang li.arc1').position();
+// $('#subtitle').animate({scrollTop: s['top']},0);
+// for (var i = 0; i <10;i++){
+//   console.log($('ul.arcchang li.arc'+i).position());
+// }
+// console.log('===============================');
+// ss = $('ul.arcchang li.arc3').position();
+// console.log(ss['top']+'!!!!!!!!!!')
+// $('#subtitle').animate({scrollTop: ss['top']+ s['top']},0);
+// for (var i = 0; i <10;i++){
+//   console.log($('ul.arcchang li.arc'+i).position());
+// }
 
 // 2. This code loads the IFrame Player API code asynchronously.
 var tag = document.createElement('script');
@@ -62,6 +69,8 @@ firstScriptTag.parentNode.insertBefore(tag, firstScriptTag);
 //    after the API code downloads.
 var player;
 
+var iii = 0;
+
 function onYouTubeIframeAPIReady() {
   player = new YT.Player('player', {
     height: '390',
@@ -72,15 +81,34 @@ function onYouTubeIframeAPIReady() {
       'onStateChange': onPlayerStateChange
     }
   });
-
+  
 }
 
-var pt;
 
 // 4. The API will call this function when the video player is ready.
 function onPlayerReady(event) {
   event.target.playVideo();  
-  // pt = setInterval("put_titie()",10)
+  function updateTime() {
+    var oldTime = videotime;
+    if(player && player.getCurrentTime) {
+      var videotime = player.getCurrentTime();
+      put_titie(videotime);
+
+      //console.log(videotime);
+      // document.getElementById("time").innerHTML = videotime;
+    }
+    if(videotime !== oldTime) {
+      onProgress(videotime);
+    }
+  }
+  timeupdater = setInterval(updateTime, 10);
+}
+
+// when the time changes, this will be called.
+function onProgress(currentTime) {
+  if(currentTime > 20) {
+    //console.log("the video reached 20 seconds!");
+  }
 }
 
 // 5. The API calls this function when the player's state changes.
@@ -89,17 +117,6 @@ function onPlayerReady(event) {
 var done = false;
 function onPlayerStateChange(event) {
 
-  if (event.data === YT.PlayerState.PLAYING){
-      pt = setInterval("put_titie()",10)
-  }
-  if(event.data === YT.PlayerState.PAUSED){    
-    clearInterval(pt);
-  }
-  
-  // if (event.data == YT.PlayerState.PLAYING && !done) {
-  //   // setTimeout(stopVideo, 6000);
-  //   done = true;
-  // }
 }
 function stopVideo() {
   player.stopVideo();
@@ -109,34 +126,62 @@ function pauseVideo() {
   player.pauseVideo();
 }
 
+var timeoutId;
+
 function playAt(st, dr) {
+  clearTimeout(timeoutId);
   player.seekTo(st/1000);
   player.playVideo();
-  setTimeout(pauseVideo, dr);
+  timeoutId = setTimeout(pauseVideo, dr);
 }
 
 
-var time = 0;
-var idx = 0;
-var called = 0;
-var put = new Array();
-for(var i=0;i<count;i++){
-  put.push(0);
-} 
 
-function put_titie(){
-  called += 10;
-  if(idx < count){
-      if(obj.lyrics[idx].t <= called){
-        if(idx > 0 && put[idx-1] === 1){
-          $("#under_subtitle"+(idx-1)).remove();
-        }
-        var small_sub =  obj.lyrics[idx].l + '</br>';
-        var under_subtitle = $("#under_subtitle").append('<span id = "under_subtitle'+idx+'">'+small_sub+'</span>');
-        put[idx] = 1;
-        idx++;
-      }
+
+var idx = 0;
+var now_index = -1;
+var s_tmp = 0;
+var r = $('#subtitle').position();
+function put_titie(t){
+    if(idx < count){      
+      if(obj.lyrics[idx].t > t*1000){
+         for(var k = 0;k<count;k++){
+           if(obj.lyrics[k].t > t*1000){
+             if(idx === 0)
+               idx = 0;
+             else
+               idx = k-1;
+             break;
+           }
+         }
+       }
+       if(obj.lyrics[idx].t <= t*1000){
+         var small_sub =  obj.lyrics[idx].l + '</br>';
+         document.getElementById("under_subtitle").innerHTML=small_sub;
+          //console.log(idx)
+          if(now_index!=idx){
+            console.log(now_index + ' '+ idx);
+            s = $('ul.arcchang li.arc'+idx).position();
+            console.log(s);
+            s_tmp+=s['top']-r['top'];
+            console.log(s_tmp);
+            now_index = idx;
+            $('#subtitle').animate({scrollTop: s_tmp},0);
+          }
+          //console.log(s)
+          
+
+
+         for(var k = 0;k<count;k++){            
+           if(obj.lyrics[k].t > t*1000){
+             idx = k;
+             break;
+           }
+         }
+       }
+        
     }
+  
 }
 
 function getTime(obj, index)
