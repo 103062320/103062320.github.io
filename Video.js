@@ -3,6 +3,12 @@
 var url = location.href;
 var ary1;
 //再來用去尋找網址列中是否有資料傳遞(QueryString)
+
+//use to record the index
+var idx = 0;
+var now_index = 0;
+var change_id = false;
+
 if(url.indexOf('?')!=-1){
      ary1 = url.split('?');
      console.log(ary1[1]);
@@ -129,8 +135,10 @@ function pauseVideo() {
 var timeoutId;
 
 function playAt(st, dr) {
+  change_id = true;
   clearTimeout(timeoutId);
   player.seekTo(st/1000);
+  put_titie(st/1000);
   player.playVideo();
   timeoutId = setTimeout(pauseVideo, dr);
 }
@@ -143,7 +151,7 @@ function MouseWheel (e) {
   e = e || window.event;
   // alert(['scrolled ', (( e.wheelDelta <= 0 || e.detail > 0) ? 'down' : 'up')].join(''));
   delta = e.deltaY;
-  console.log("in func" + delta);
+  //console.log("in func" + delta);
   return e;
 }
 
@@ -194,8 +202,7 @@ console.log(delta);
 
 
 
-var idx = 0;
-var now_index = 0;
+
 var s_tmp = 0;
 var r = $('#subtitle').position();
 function put_titie(t){
@@ -211,6 +218,20 @@ function put_titie(t){
            }
          }
        }
+       while(idx < count -1){
+        if(obj.lyrics[idx+1].t <= t*1000){
+          idx += 1;
+        }else{
+          break;
+        }
+       }
+       // if(change_id){
+       //  console.log("time = " + t);
+       //  console.log("change sussess");
+       //  now_index = idx - 2;
+       //  change_id = false;
+       //  console.log(" id = " + idx);
+       // }
        if(obj.lyrics[idx].t <= t*1000){
          document.getElementById("icon"+idx).style.color="green";
         //  console.log("idx out loop : "+idx);
@@ -225,18 +246,30 @@ function put_titie(t){
             document.getElementById("small_sub"+a).style.backgroundColor="#e6e6e6";
          }
          
+         //console.log("idx = " + idx);
          var small_sub =  obj.lyrics[idx].l + '</br>';
          document.getElementById("under_subtitle").innerHTML=small_sub;
           //console.log(idx)  //now_index!=idx
-          if(now_index < idx-2 || now_index > idx){
-            console.log(now_index + ' '+ idx);
-            s = $('ul.arcchang li.arc'+(idx-2)).position();
-            console.log(s);
-            s_tmp+=s['top']-r['top'];
-            console.log(s_tmp);
-            now_index++;
-            $('#subtitle').animate({scrollTop: s_tmp},0);
-          }
+          
+             // if(now_index < idx-2 || now_index > idx ){
+             //    console.log(now_index + ' '+ idx);
+             //    s = $('ul.arcchang li.arc'+(idx-2)).position();
+             //    //console.log(s);
+             //    s_tmp+=s['top']-r['top'];
+             //    //console.log(s_tmp);
+             //    now_index++;
+             //    $('#subtitle').animate({scrollTop: s_tmp},0);
+             //  }
+
+             if(idx > 2 && now_index != idx){
+              console.log(now_index + ' ' + idx);
+              s = $('ul.arcchang li.arc'+(idx-2)).position();
+              s_tmp+=s['top']-r['top'];
+              $('#subtitle').animate({scrollTop: s_tmp},0);
+              now_index = idx;
+             }
+        
+          
           //console.log(s)
           
 
