@@ -39,12 +39,19 @@ text = localStorage.getItem(ary1[1]);
 obj = JSON.parse(text);
 
 var count = Object.keys(obj.lyrics).length;
+var half_count = count/2;
 
-for(var i = 0; i < count; i++){
+
+
+for(var i = 0; i < half_count; i++){
   var small_sub =  obj.lyrics[i].l;
   //console.log(small_sub);
   var subtitle = $("#subtitle").append('<li class = "arc'+ i +'" ><i class="far fa-play-circle" id = "icon'+i+'"  onclick="playAt('+obj.lyrics[i].t+','+obj.lyrics[i].d+')"></i> <span id = "small_sub'+i+'">'+small_sub+'</span></li>'); 
 }
+
+console.log(obj.lyrics);
+
+
 
 // var ssss = '';
 // for (var i = 0; i <10;i++){
@@ -198,17 +205,15 @@ if ('onmousewheel' in window) {
 
 
 
-console.log(delta);
-
 
 
 
 var s_tmp = 0;
 var r = $('#subtitle').position();
 function put_titie(t){
-    if(idx < count){      
+    if(idx < half_count){      
       if(obj.lyrics[idx].t > t*1000){
-         for(var k = 0;k<count;k++){
+         for(var k = 0;k<half_count;k++){
            if(obj.lyrics[k].t > t*1000){
              if(idx === 0)
                idx = 0;
@@ -218,7 +223,7 @@ function put_titie(t){
            }
          }
        }
-       while(idx < count -1){
+       while(idx < half_count -1){
         if(obj.lyrics[idx+1].t <= t*1000){
           idx += 1;
         }else{
@@ -236,7 +241,7 @@ function put_titie(t){
          document.getElementById("icon"+idx).style.color="green";
         //  console.log("idx out loop : "+idx);
 
-         for(var a = 0;a<count;a++){
+         for(var a = 0;a<half_count;a++){
           //  console.log("idx in loop : "+idx);
           //  console.log("a : "+a);
            
@@ -248,7 +253,10 @@ function put_titie(t){
          
          //console.log("idx = " + idx);
          var small_sub =  obj.lyrics[idx].l + '</br>';
+         var small_sub_ch =  obj.lyrics[idx+half_count].l + '</br>';
          document.getElementById("under_subtitle").innerHTML=small_sub;
+         document.getElementById("under_subtitle_ch").innerHTML=small_sub_ch;
+         
           //console.log(idx)  //now_index!=idx
           
              // if(now_index < idx-2 || now_index > idx ){
@@ -274,7 +282,7 @@ function put_titie(t){
           
 
 
-         for(var k = 0;k<count;k++){            
+         for(var k = 0;k<half_count;k++){            
            if(obj.lyrics[k].t > t*1000){
              idx = k;
              break;
